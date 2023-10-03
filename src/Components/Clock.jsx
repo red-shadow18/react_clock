@@ -100,8 +100,8 @@ align-items:center;
     font-size: 10px;
     font-weight: 600;
     position: absolute;
-    top: 35%;
-    left: 52%;
+    top: 40%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
