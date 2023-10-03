@@ -96,7 +96,27 @@ align-items:center;
 
 }
 
+.brandName {
+    font-size: 10px;
+    font-weight: 600;
+    position: absolute;
+    top: 35%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
 
+.digitalClock {
+    display: flex;
+    gap: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    top: 55%;
+    position: absolute;
+
+    span {
+        width: 15px; 
+    }
+}
 
 `
 
@@ -113,18 +133,37 @@ b {
 let secondDeg=0;
 let minuteDeg=0;
 let hourDeg=0;
+let secondDig=0;
+let minuteDig=0;
+let hourDig=0;
+let isAM=true
 let date = new Date()
 
 const Clock=()=>{
 
     setInterval(()=>{
         date= new Date();
+
         secondDeg=date.getSeconds()*6
         minuteDeg=date.getMinutes()*6
         hourDeg=date.getHours()*30 + Math.round(minuteDeg/12)
+
+        secondDig=date.getSeconds()
+        minuteDig=date.getHours()
+        hourDig=date.getHours()
+        if(hourDig>12){
+            isAM=false
+            hourDig=hourDig-12
+        }
+
         document.getElementById("secondHand").style.transform=`rotate(${secondDeg}deg)`
         document.getElementById("minuteHand").style.transform=`rotate(${minuteDeg}deg)`
         document.getElementById("hourHand").style.transform=`rotate(${hourDeg}deg)`
+
+        document.getElementById("digitalHr").innerText=hourDig.toString().padStart(2,"0")
+        document.getElementById("digitalMin").innerText=minuteDig.toString().padStart(2,"0")
+        document.getElementById("digitalSec").innerText=secondDig.toString().padStart(2,"0")
+        document.getElementById("digitalSession").innerText=isAM?"AM":"PM"
     },1000)
     return(
         <ClockContainer>
@@ -149,6 +188,14 @@ const Clock=()=>{
                 <HourSpan className="individualHour" hour={11}><b>11</b></HourSpan>
                 <HourSpan className="individualHour" hour={12}><b>12</b></HourSpan>
             </div>
+            </div>
+            <span className="brandName">Red Shadow</span>
+            <div className="digitalClock">
+                <span id="digitalHr">0</span>:
+                <span id="digitalMin">0</span>:
+                <span id="digitalSec">0</span>
+                <span id="digitalSession">AM</span>
+                
             </div>
         </ClockContainer>
     )
