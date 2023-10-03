@@ -48,7 +48,6 @@ align-items:center;
             display: flex;
             align-items: flex-start;
             left: 50%;
-            transform: translate(-50%, -50%);
         }
 
         #minuteHand {
@@ -58,7 +57,6 @@ align-items:center;
             align-items: flex-start;
             left: 50%;
             top:10%;
-            transform: translate(-50%, -50%);
         }
 
         #hourHand {
@@ -68,7 +66,6 @@ align-items:center;
             align-items: flex-start;
             left: 50%;
             top:20%;
-            transform: translate(-50%, -50%);
         }
 
         .secHand {
@@ -125,8 +122,8 @@ const Clock=()=>{
         secondDeg=date.getSeconds()*6
         minuteDeg=date.getMinutes()*6
         hourDeg=date.getHours()*30 + Math.round(minuteDeg/12)
-        document.getElementById("secondHand").style.transform=`rotate(${minuteDeg}deg)`
-        document.getElementById("minuteHand").style.transform=`rotate(${secondDeg}deg)`
+        document.getElementById("secondHand").style.transform=`rotate(${secondDeg}deg)`
+        document.getElementById("minuteHand").style.transform=`rotate(${minuteDeg}deg)`
         document.getElementById("hourHand").style.transform=`rotate(${hourDeg}deg)`
     },1000)
     return(
