@@ -205,9 +205,9 @@ const Clock=()=>{
             </div>
             <span className="brandName">Red Shadow</span>
             <div className="digitalClock">
-                <span id="digitalHr">{hourDig}</span>:
-                <span id="digitalMin">{minuteDig}</span>:
-                <span id="digitalSec">{secondDig}</span>
+                <span id="digitalHr">{hourDig.toString().padStart(2,"0")}</span>:
+                <span id="digitalMin">{minuteDig.toString().padStart(2,"0")}</span>:
+                <span id="digitalSec">{secondDig.toString().padStart(2,"0")}</span>
                 <span id="digitalSession">{isAM?"AM":"PM"}</span>
                 
             </div>
