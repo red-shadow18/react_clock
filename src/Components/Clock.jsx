@@ -1,5 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from '@emotion/styled'
+
+let chotuKaBday=new Date("21 Nov 2023 0:0:0").getTime()
+let currentDate=new Date().getTime()
+let distance=(chotuKaBday-currentDate)/1000
+let leftDays=parseInt(distance/(24*60*60))
+distance %=(24*60*60)
+let leftHours=parseInt(distance/(60*60))
+distance %=(60*60)
+let leftMins=parseInt(distance/60)
+let leftSecs=parseInt(distance%60)
+
 
 let date = new Date()
 let secondDeg=date.getSeconds()*6;
@@ -15,7 +26,7 @@ if(hourDig>12){
 }
 
 const ClockContainer=styled.div`
-height:100vh;
+height:60vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -120,7 +131,7 @@ align-items:center;
     font-size: 10px;
     font-weight: 600;
     position: absolute;
-    top: 40%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -130,7 +141,7 @@ align-items:center;
     gap: 5px;
     font-weight: 500;
     font-size: 16px;
-    top: 55%;
+    top: 35%;
     position: absolute;
 
     span {
@@ -150,7 +161,19 @@ b {
     position:absolute;
 }
 `
+const CountDownContainer=styled.div`
+    display: flex;
+    justify-content: center;
 
+    table,th,td {
+        border:1px solid black;
+        border-collapse: collapse;
+    }
+
+    th {
+        padding:5px;
+    }
+`
 
 
 const Clock=()=>{
@@ -179,7 +202,27 @@ const Clock=()=>{
         document.getElementById("digitalSec").innerText=secondDig.toString().padStart(2,"0")
         document.getElementById("digitalSession").innerText=isAM?"AM":"PM"
     },1000)
-    return(
+
+
+    setInterval(()=>{
+
+        distance=(chotuKaBday-currentDate)/1000
+        currentDate=new Date().getTime()
+        leftDays=parseInt(distance/(24*60*60))
+        distance %=(24*60*60)
+        leftHours=parseInt(distance/(60*60))
+        distance %=(60*60)
+        leftMins=parseInt(distance/60)
+        leftSecs=parseInt(distance%60)
+
+
+        document.getElementById("leftDays").innerText=leftDays.toString().padStart(2,"0")
+        document.getElementById("leftHours").innerText=leftHours.toString().padStart(2,"0")
+        document.getElementById("leftMins").innerText=leftMins.toString().padStart(2,"0")
+        document.getElementById("leftSecs").innerText=leftSecs.toString().padStart(2,"0")
+    },1000)
+
+    return(<Fragment>
         <ClockContainer>
             <div className="clockDial">
             <div className="centralPoint"></div>
@@ -210,8 +253,25 @@ const Clock=()=>{
                 <span id="digitalSec">{secondDig.toString().padStart(2,"0")}</span>
                 <span id="digitalSession">{isAM?"AM":"PM"}</span>
                 
-            </div>
+            </div>            
         </ClockContainer>
+        <CountDownContainer className="countDownTimer">
+                <table>
+                    <tr>
+                        <th>Days</th>
+                        <th>Hours</th>
+                        <th>Minutes</th>
+                        <th>Seconds</th>
+                    </tr>
+                    <tr>
+                        <td id="leftDays">{leftDays}</td>
+                        <td id="leftHours">{leftHours}</td>
+                        <td id="leftMins">{leftMins}</td>
+                        <td id="leftSecs">{leftSecs}</td>
+                    </tr>
+                </table>
+            </CountDownContainer>
+        </Fragment>
     )
 }
 
