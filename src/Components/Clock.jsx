@@ -1,11 +1,28 @@
 import React from "react";
 import styled from '@emotion/styled'
 
+let date = new Date()
+let secondDeg=date.getSeconds()*6;
+let minuteDeg=date.getMinutes()*6;
+let hourDeg=date.getHours()*30 + Math.round(minuteDeg/12);
+let secondDig=date.getSeconds();
+let minuteDig=date.getMinutes();
+let hourDig=date.getHours();
+let isAM=true
+if(hourDig>12){
+    isAM=false
+    hourDig=hourDig-12
+}
+
 const ClockContainer=styled.div`
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+
+.visibilityHidden {
+    visibility: hidden;
+}
 
 .clockDial {
     height:300px;
@@ -48,6 +65,7 @@ align-items:center;
             display: flex;
             align-items: flex-start;
             left: 50%;
+            transform:rotate(${secondDeg}deg);
         }
 
         #minuteHand {
@@ -57,6 +75,7 @@ align-items:center;
             align-items: flex-start;
             left: 50%;
             top:10%;
+            transform:rotate(${minuteDeg}deg);
         }
 
         #hourHand {
@@ -66,6 +85,7 @@ align-items:center;
             align-items: flex-start;
             left: 50%;
             top:20%;
+            transform:rotate(${hourDeg}deg);
         }
 
         .secHand {
@@ -130,14 +150,8 @@ b {
     position:absolute;
 }
 `
-let secondDeg=0;
-let minuteDeg=0;
-let hourDeg=0;
-let secondDig=0;
-let minuteDig=0;
-let hourDig=0;
-let isAM=true
-let date = new Date()
+
+
 
 const Clock=()=>{
 
@@ -149,7 +163,7 @@ const Clock=()=>{
         hourDeg=date.getHours()*30 + Math.round(minuteDeg/12)
 
         secondDig=date.getSeconds()
-        minuteDig=date.getHours()
+        minuteDig=date.getMinutes()
         hourDig=date.getHours()
         if(hourDig>12){
             isAM=false
@@ -191,10 +205,10 @@ const Clock=()=>{
             </div>
             <span className="brandName">Red Shadow</span>
             <div className="digitalClock">
-                <span id="digitalHr">0</span>:
-                <span id="digitalMin">0</span>:
-                <span id="digitalSec">0</span>
-                <span id="digitalSession">AM</span>
+                <span id="digitalHr">{hourDig}</span>:
+                <span id="digitalMin">{minuteDig}</span>:
+                <span id="digitalSec">{secondDig}</span>
+                <span id="digitalSession">{isAM?"AM":"PM"}</span>
                 
             </div>
         </ClockContainer>
