@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import styled from '@emotion/styled'
+import hands from "../Assests/hands.png"
+import flyingButterfly from "../Assests/flyingButterfly.gif"
 
 let chotuKaBday=new Date("21 Nov 2023 0:0:0").getTime()
 let currentDate=new Date().getTime()
@@ -164,6 +166,8 @@ b {
 const CountDownContainer=styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
     table,th,td {
         border:1px solid black;
@@ -173,6 +177,38 @@ const CountDownContainer=styled.div`
     th {
         padding:5px;
     }
+`
+
+const ButterflyAnimationContainer=styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:30vh;
+    margin-top:10px;
+    .sky{
+        position: relative;
+        height:100%;
+        width:300px;
+        background:linear-gradient(180deg, #178ce8, #bfe2ff 85%, transparent);
+    }
+    .chotuKeHands{
+        height:100%;
+        overflow: visible;
+        img {
+            width: 100%;
+            transform: translate(-50%, 0%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    }
+    .flyingButterflies{
+        position: absolute;
+        top:0;
+        z-index:2;
+        scale:1.2
+    }
+
 `
 
 
@@ -256,6 +292,7 @@ const Clock=()=>{
             </div>            
         </ClockContainer>
         <CountDownContainer className="countDownTimer">
+            <p>Chotu ka b'day in:</p>
                 <table>
                     <tr>
                         <th>Days</th>
@@ -270,7 +307,17 @@ const Clock=()=>{
                         <td id="leftSecs">{leftSecs}</td>
                     </tr>
                 </table>
-            </CountDownContainer>
+        </CountDownContainer>
+        <ButterflyAnimationContainer>
+        <div className="sky">
+        <div className="chotuKeHands">
+        <img height={"100%"} src={hands} alt="hands"/>
+        </div>
+        <div className="flyingButterflies">
+        <img width="300px" src={flyingButterfly} alt="flyingButterfly"/>
+        </div>
+        </div>
+        </ButterflyAnimationContainer>
         </Fragment>
     )
 }
