@@ -200,6 +200,7 @@ const ButterflyAnimationContainer=styled.div`
             position: absolute;
             top: 50%;
             left: 50%;
+            filter: drop-shadow(2px 4px 6px black);
         }
     }
     .flyingButterflies{
