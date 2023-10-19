@@ -292,6 +292,7 @@ const Clock=()=>{
                 
             </div>            
         </ClockContainer>
+        <p>I'm not sure if you still open this page or not, but just in case you do, I want you to know that I do miss you and I care, but all that you aspire, I can't provide it!</p>
         <CountDownContainer className="countDownTimer">
             <p>Chotu ka b'day in:</p>
                 <table>
